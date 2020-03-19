@@ -22,7 +22,18 @@ const updateButton = function(){
     console.log('Updating button ......')
     const icon = this.paused ? '►' : '❚ ❚';
     toggle.textContent = icon;
-}
+};
+
+const skip = function(){
+    console.log(this.dataset.skip);
+    video.currentTime += parseFloat(this.dataset.skip);
+};
+
+const handleRangeUpdate = function(){
+    video[this.name] = this.value;
+    console.log(this.name);
+    console.log(this.value);
+};
 
 //Event listeners
 
@@ -34,4 +45,8 @@ video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
 
 toggle.addEventListener('click', togglePlay);
-
+//skip buttons
+skipButtons.forEach(button => button.addEventListener('click', skip));
+//sliders range
+ranges.forEach(range => range.addEventListener('change', handleRangeUpdate));
+range.forEach(range => range.addEventListener('mousemove', handleRangeUpdate));
